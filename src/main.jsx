@@ -5,6 +5,7 @@ import "./index.css";
 import Store from "./app/store.js";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import "@fontsource/inter";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
