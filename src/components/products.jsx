@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useGetProductsQuery } from "../api/soapApi";
 
 const GetAllProducts = () => {
@@ -7,16 +7,15 @@ const GetAllProducts = () => {
 
   useEffect(() => {
     if (data) {
-      setProducts(data.products);
+      setProducts(data);
     }
   }, [data]);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
       <h1>All Products</h1>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       {products && products.length > 0 ? (
         products.map((product) => (
           <div key={product.id}>
@@ -25,7 +24,7 @@ const GetAllProducts = () => {
           </div>
         ))
       ) : (
-        <p>No products available.</p>
+        <p>{!isLoading && "No products available."}</p>
       )}
     </div>
   );

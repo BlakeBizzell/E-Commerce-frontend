@@ -1,5 +1,5 @@
 import "./App.css";
-import GetAllProducts from "./components/products";
+import GetAllProducts from "./components/Products";
 
 function App() {
   return (
