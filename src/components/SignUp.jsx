@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAddUserQuery } from "../api/soapApi";
+import { useAddUserMutation } from "../api/soapApi";
 import SignIn from "./SignIn";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
@@ -41,16 +41,32 @@ const defaultTheme = createTheme({
 });
 
 export default function SignUp() {
+  const [addNewUser] = useAddUserMutation();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
   });
-  const handleSubmit = (event) => {
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    try {
+      const response = await addNewUser(formData);
+      // return (
+      //   <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+      //     Welcome to sudsational soap's.
+      //   </Alert>
+      // );
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
@@ -87,6 +103,8 @@ export default function SignUp() {
                   type="username"
                   id="username"
                   autoComplete="new-username"
+                  value={formData.username}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,6 +127,8 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={formData.firstName}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -119,8 +139,11 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={formData.lastName}
+                  onChange={handleChange}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -129,6 +152,8 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}></Grid>
