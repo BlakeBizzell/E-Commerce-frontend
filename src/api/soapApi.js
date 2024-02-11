@@ -8,9 +8,26 @@ export const soapApi = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({ query: () => "/api/products" }),
     getProduct: builder.query({ query: (id) => "/api/products/:id" }),
-    addUser: builder.query({ query: () => "/auth/users" }),
+    addUser: builder.mutation({
+      query: (userData) => ({
+        url: "/auth/users/register",
+        method: "POST",
+        body: userData,
+      }),
+    }),
+    loginUser: builder.mutation({
+      query: (userData) => ({
+        url: "/auth/users/login",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductQuery, useAddUserQuery } =
-  soapApi;
+export const {
+  useGetProductsQuery,
+  useGetProductQuery,
+  useAddUserMutation,
+  useLoginUserMutation,
+} = soapApi;

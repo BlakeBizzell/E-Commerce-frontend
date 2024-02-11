@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,42 +13,32 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SignUp from "./SignUp";
+import { useLoginUserMutation } from "../api/soapApi";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>
-      {new Date().getFullYear()}
-    </Typography>
-  );
-}
+function SignIn() {
+  const [loginUser] = useLoginUserMutation();
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await loginUser(formData);
+      // Handle the response as needed (e.g., store token, redirect, etc.)
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
+  const defaultTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -83,6 +73,8 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
+              value={formData.username}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -93,6 +85,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formData.password}
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -116,8 +110,9 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignIn;
