@@ -8,7 +8,9 @@ export const soapApi = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({ query: () => "/api/products" }),
     getProduct: builder.query({ query: (id) => "/api/products/:id" }),
+    addUser: builder.query({ query: () => "/auth/users" }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductQuery } = soapApi;
+export const { useGetProductsQuery, useGetProductQuery, useAddUserQuery } =
+  soapApi;
