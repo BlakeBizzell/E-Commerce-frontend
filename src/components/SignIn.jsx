@@ -28,7 +28,7 @@ function SignIn() {
     event.preventDefault();
     try {
       const response = await loginUser(formData);
-      // Handle the response as needed (e.g., store token, redirect, etc.)
+      console.log("Token Response:", JSON.stringify(response));
     } catch (error) {
       console.error("Login failed:", error);
     }

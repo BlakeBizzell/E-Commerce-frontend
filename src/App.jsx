@@ -5,6 +5,7 @@ import GetAllProducts from "./components/Products";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
+import GetProduct from "./components/SingleProduct";
 
 function App() {
   const darkTheme = createTheme({
@@ -19,6 +20,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/products" element={<GetAllProducts />} />
+          <Route path="/products/:id" element={<GetProduct />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
