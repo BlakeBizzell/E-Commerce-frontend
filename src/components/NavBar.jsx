@@ -17,10 +17,8 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import MainContainer from "../styles/MainContainer";
-import { Route } from "react-router-dom";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -58,9 +56,9 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(0),
       [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
+        width: theme.spacing(0),
       },
     }),
   },
@@ -88,7 +86,7 @@ const NavBar = () => {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "0px", // keep right padding when drawer closed
+              pr: "0px",
             }}
           >
             <IconButton
@@ -119,7 +117,7 @@ const NavBar = () => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} sx={{ height: "100%" }}>
           <Toolbar
             sx={{
               display: "flex",
@@ -148,21 +146,6 @@ const NavBar = () => {
             <Divider sx={{ my: 1 }} />
           </List>
         </Drawer>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-            marginTop: "2%",
-          }}
-        >
-          <MainContainer selectedLink={location.pathname} />
-        </Box>
       </Box>
     </ThemeProvider>
   );

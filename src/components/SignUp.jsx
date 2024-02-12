@@ -11,9 +11,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAddUserMutation } from "../api/soapApi";
-import SignIn from "./SignIn";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import WarningIcon from "@mui/icons-material/Warning";
 
 function Copyright(props) {
   return (
@@ -32,8 +34,6 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme({
   palette: {
     mode: "dark",
@@ -50,6 +50,9 @@ export default function SignUp() {
     email: "",
   });
 
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -59,11 +62,11 @@ export default function SignUp() {
     event.preventDefault();
     try {
       const response = await addNewUser(formData);
-      // return (
-      //   <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-      //     Welcome to sudsational soap's.
-      //   </Alert>
-      // );
+      if (response.status === 201 || 204) {
+        setShowSuccessAlert(true);
+      } else if (response.status === 500) {
+        setShowErrorAlert(true);
+      }
     } catch (err) {
       throw err;
     }
@@ -73,6 +76,23 @@ export default function SignUp() {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        {showSuccessAlert && (
+          <Alert
+            icon={<CheckCircleIcon fontSize="inherit" />}
+            severity="success"
+          >
+            Welcome to Sudsational Soap's.
+          </Alert>
+        )}
+        {showErrorAlert && (
+          <Alert
+            title="This Account already exists"
+            color="warning"
+            icon={<WarningIcon />}
+          >
+            Account already exists. Please try again.
+          </Alert>
+        )}
         <Box
           sx={{
             marginTop: 8,
@@ -175,6 +195,7 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
+
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
