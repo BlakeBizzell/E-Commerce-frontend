@@ -17,23 +17,6 @@ import Alert from "@mui/material/Alert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningIcon from "@mui/icons-material/Warning";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>
-      {new Date().getFullYear()}
-    </Typography>
-  );
-}
-
 const defaultTheme = createTheme({
   palette: {
     mode: "dark",
@@ -195,8 +178,6 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

@@ -1,11 +1,14 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Routes, Route } from "react-router-dom";
-import GetAllProducts from "./components/Products";
+import GetAllProducts from "./components/Products.jsx";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import GetProduct from "./components/SingleProduct";
+import GetAccount from "./components/accountInformation.jsx";
+import GetCart from "./components/cart";
+import InitialView from "./components/initialView.jsx";
 
 function App() {
   const darkTheme = createTheme({
@@ -19,10 +22,13 @@ function App() {
         <CssBaseline />
         <NavBar />
         <Routes>
+          <Route path="/" element={<InitialView />} />
           <Route path="/products" element={<GetAllProducts />} />
           <Route path="/products/:id" element={<GetProduct />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/myAccount" element={<GetAccount />} />
+          <Route path="/cart" element={<GetCart />} />
         </Routes>
       </ThemeProvider>
     </>
