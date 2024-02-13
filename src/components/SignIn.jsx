@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -14,10 +14,13 @@ import Container from "@mui/material/Container";
 import { Link as RouterLink } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLoginUserMutation } from "../api/soapApi";
+import { setToken } from "../slice/getUserSlice";
 
 function SignIn() {
-  const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const loginUser = useLoginUserMutation();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +31,7 @@ function SignIn() {
     event.preventDefault();
     try {
       const response = await loginUser(formData);
-      console.log("Token Response:", JSON.stringify(response));
+      dispatch(setToken(response.data.token));
     } catch (error) {
       console.error("Login failed:", error);
     }

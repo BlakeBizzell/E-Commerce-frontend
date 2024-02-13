@@ -3,12 +3,12 @@ import { soapApi } from "../api/soapApi";
 
 const productSlice = createSlice({
   name: "product",
-  initialState: [],
+  initialState: null,
   extraReducers: (builder) => {
     builder.addMatcher(
       soapApi.endpoints.getProduct.matchFulfilled,
       (state, { payload }) => {
-        return payload.results;
+        return payload;
       }
     );
   },
