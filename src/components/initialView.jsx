@@ -88,7 +88,7 @@ const InitialView = () => {
                   Sign up
                 </Button>
               </Link>
-              <Link to="/guest">
+              <Link to="/products">
                 <Button
                   sx={{ margin: "10px 0" }}
                   variant="contained"
