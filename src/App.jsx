@@ -9,6 +9,7 @@ import GetProduct from "./components/SingleProduct";
 import GetAccount from "./components/accountInformation.jsx";
 import GetCart from "./components/cart";
 import InitialView from "./components/initialView.jsx";
+import IsAdmin from "./components/IsAdmin.jsx";
 
 function App() {
   const darkTheme = createTheme({
@@ -29,6 +30,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/myAccount" element={<GetAccount />} />
           <Route path="/cart" element={<GetCart />} />
+          <Route path="/admin" element={<IsAdmin />} />
         </Routes>
       </ThemeProvider>
     </>

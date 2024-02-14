@@ -14,7 +14,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 
-
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const defaultTheme = createTheme({
@@ -82,6 +81,9 @@ const NavBar = () => {
           </MenuItem>
           <MenuItem component={RouterLink} to="/products" onClick={handleClose}>
             Products
+          </MenuItem>
+          <MenuItem component={RouterLink} to="/admin" onClick={handleClose}>
+            Admin
           </MenuItem>
           <MenuItem
             component={RouterLink}
