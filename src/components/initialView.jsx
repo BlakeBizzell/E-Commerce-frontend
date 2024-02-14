@@ -32,74 +32,73 @@ const InitialView = () => {
   }, [fetchedData, isLoading, error]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div>
-        <Carousel>
-          {products.map((product) => (
-            <img
-              key={product.id}
-              src={`data:image/png;base64, ${product.image}`}
-              alt="Product Image"
-              style={{
-                height: "400px",
-                display: "block",
-                margin: "0 auto",
-              }}
-            />
-          ))}
-        </Carousel>
-      </div>
-
+    <div style={{ position: "relative" }}>
+      <Carousel sx={{ zIndex: 0 }}>
+        {products.map((product) => (
+          <img
+            key={product.id}
+            src={`data:image/png;base64, ${product.image}`}
+            alt="Product Image"
+            style={{
+              height: "50%",
+              display: "block",
+              margin: "0 auto",
+            }}
+          />
+        ))}
+      </Carousel>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1,
+          textAlign: "center",
         }}
       >
-        <Card sx={{ width: 400, height: 300 }}>
-          <CardContent>
-            <CardActions
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-              }}
-            >
-              <Link to="/sign-in">
-                <Button
-                  sx={{ margin: "10px 0" }}
-                  variant="contained"
-                  size="large"
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link to="/sign-up">
-                <Button
-                  sx={{ margin: "10px 0" }}
-                  variant="contained"
-                  size="large"
-                >
-                  Sign up
-                </Button>
-              </Link>
-              <Link to="/products">
-                <Button
-                  sx={{ margin: "10px 0" }}
-                  variant="contained"
-                  size="large"
-                >
-                  Continue as guest
-                </Button>
-              </Link>
-            </CardActions>
-          </CardContent>
-        </Card>
+        <Link to="/sign-in">
+          <Button
+            sx={{
+              margin: "10px 0",
+              background: "rgba(255, 255, 255, 0.3)",
+              display: "block",
+              textDecoration: "none",
+            }}
+            variant="contained"
+            size="large"
+          >
+            Login
+          </Button>
+        </Link>
+        <Link to="/sign-up">
+          <Button
+            sx={{
+              margin: "10px 0",
+              background: "rgba(255, 255, 255, 0.3)",
+              display: "block",
+              textDecoration: "none",
+            }}
+            variant="contained"
+            size="large"
+          >
+            Sign up
+          </Button>
+        </Link>
+        <Link to="/products">
+          <Button
+            sx={{
+              margin: "10px 0",
+              background: "rgba(255, 255, 255, 0.3)",
+              display: "block",
+              textDecoration: "none",
+            }}
+            variant="contained"
+            size="large"
+          >
+            Continue as guest
+          </Button>
+        </Link>
       </div>
     </div>
   );
