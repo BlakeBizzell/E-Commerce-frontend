@@ -1,13 +1,25 @@
-import React from "react";
-import { useGetProductsQuery } from "../api/soapApi";
+import {
+  useGetProductsQuery,
+  useAddToCartMutation,
+  useGetUserQuery,
+} from "../api/soapApi";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+const getUserId = async () => {
+  const { data, error, isLoading } = useGetUserQuery;
+  console.log("data", data);
+};
+getUserId();
 
 const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
+  const { userId } = useParams();
+  console.log("id:", userId);
 
   return (
     <div>
@@ -34,9 +46,9 @@ const GetAllProducts = () => {
                 <Link to={`/products/${product.id}`} key={product.id}>
                   <Button>See Details</Button>
                 </Link>
-                <Link>
-                  <Button>Add to Cart</Button>
-                </Link>
+                <Button onClick={() => handleAddToCart(product.id)}>
+                  Add to Cart
+                </Button>
               </div>
             </Card>
           ))}
