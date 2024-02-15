@@ -5,10 +5,14 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     token: null,
+    userId: null,
   },
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
+    },
+    setUser: (state, action) => {
+      state.userId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -21,5 +25,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken } = userSlice.actions;
+export const { setToken, setUser } = userSlice.actions;
 export default userSlice.reducer;

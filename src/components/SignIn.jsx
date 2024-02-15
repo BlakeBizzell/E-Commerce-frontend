@@ -15,13 +15,13 @@ import { Link as RouterLink } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLoginUserMutation } from "../api/soapApi";
 import { setToken } from "../slice/getUserSlice";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({ username: "", password: "" });
-
-  const loginUser = useLoginUserMutation();
-
+  const navigate = useNavigate();
+  const [loginUser] = useLoginUserMutation();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -32,6 +32,12 @@ function SignIn() {
     try {
       const response = await loginUser(formData);
       dispatch(setToken(response.data.token));
+
+      const userId = response.data.user.id;
+      navigate("/products");
+      if (!userId) {
+        console.error("Failed to fetch user data.");
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }

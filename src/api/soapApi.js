@@ -7,7 +7,7 @@ export const soapApi = createApi({
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({ query: () => "/api/products" }),
-    getProduct: builder.query({ query: (id) => `/api/products/${id} ` }),
+    getProduct: builder.query({ query: (id) => `/api/products/${id}` }),
     getUser: builder.query({ query: (id) => `auth/users/${id}` }),
     addUser: builder.mutation({
       query: (userData) => ({
@@ -23,6 +23,22 @@ export const soapApi = createApi({
         body: userData,
       }),
     }),
+    addToCart: builder.mutation({
+      query: ({ userId, productId, quantity }) => ({
+        url: `/api/users/${userId}/cart`,
+        method: "POST",
+        body: { productId, quantity },
+      }),
+    }),
+    removeFromCart: builder.mutation({
+      query: ({ userId, cartItemId }) => ({
+        url: `/api/users/${userId}/cart/${cartItemId}`,
+        method: "DELETE",
+      }),
+    }),
+    getCartItems: builder.query({
+      query: (userId) => `/api/users/${userId}/cart`,
+    }),
   }),
 });
 
@@ -32,4 +48,7 @@ export const {
   useGetUserQuery,
   useAddUserMutation,
   useLoginUserMutation,
+  useAddToCartMutation,
+  useRemoveFromCartMutation,
+  useGetCartItemsQuery,
 } = soapApi;
