@@ -11,16 +11,17 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLoginUserMutation } from "../api/soapApi";
 import { setToken } from "../slice/getUserSlice";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignIn() {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: "", password: "" });
+
   const [loginUser] = useLoginUserMutation();
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,13 +30,41 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const response = await loginUser(formData);
       dispatch(setToken(response.data.token));
       const userId = response.data.user.id;
-      console.log(userId);
-      navigate("/products");
-      if (!userId) {
+
+      if (userId) {
+        // Try to make a request to fetch the user info
+        const userResponse = await axios.get(
+          `http://localhost:3000/auth/users/${userId}`
+        );
+
+        // Check if the response contains the expected user data
+        if (userResponse.data && typeof userResponse.data === "object") {
+          const userData = userResponse.data;
+
+          // Dispatch an action to store the user info in the Redux store
+          dispatch({
+            type: "user/fetchUserDetails",
+            payload: { userData },
+          });
+        } else {
+          // Handle the case when the expected user data is not present in the response
+          console.error(
+            "Incorrect user data received from the API. Please check the API response again."
+          );
+        }
+
+        console.log("User details fetched successfully:", userResponse);
+
+        navigate("/products");
+        if (!userId) {
+          console.error("Failed to fetch user data.");
+        }
+      } else {
         console.error("Failed to fetch user data.");
       }
     } catch (error) {
