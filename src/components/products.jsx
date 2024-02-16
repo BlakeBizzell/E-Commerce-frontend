@@ -1,25 +1,25 @@
-import {
-  useGetProductsQuery,
-  useAddToCartMutation,
-  useGetUserQuery,
-} from "../api/soapApi";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
-const getUserId = async () => {
-  const { data, error, isLoading } = useGetUserQuery;
-  console.log("data", data);
-};
-getUserId();
+import React from "react";
+import { Box, Card, CardContent, Button } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
+import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
 
 const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
   const { userId } = useParams();
-  console.log("id:", userId);
+  const [addToCart] = useAddToCartMutation();
+  console.log("params", userId);
+  const handleAddToCart = async (productId) => {
+    // Hardcoded userId as 3 for testing purposes
+    const hardCodedUserId = 3;
+    const quantity = 1; // You can adjust the quantity as needed
+
+    try {
+      await addToCart({ userId: hardCodedUserId, productId, quantity });
+      console.log("Product added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
 
   return (
     <div>
@@ -43,7 +43,7 @@ const GetAllProducts = () => {
                 <p>${product.price}</p>
               </CardContent>
               <div style={{ textAlign: "center" }}>
-                <Link to={`/products/${product.id}`} key={product.id}>
+                <Link to={`/products/${product.id}`}>
                   <Button>See Details</Button>
                 </Link>
                 <Button onClick={() => handleAddToCart(product.id)}>
