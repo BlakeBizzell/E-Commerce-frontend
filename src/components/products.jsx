@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Card, CardContent, Button } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
