@@ -1,45 +1,37 @@
-// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { soapApi } from "../api/soapApi";
+
+// function storeUser(state, { payload }) {
+//   state = { user: { ...payload.user } };
+//   window.sessionStorage.setItem(
+//     JSON.stringify({
+//       user: { ...payload.user },
+//     })
+//   );
+// }
+// let userCredentials = {
+//   username: "",
+//   password: "",
+// };
+// storeUser({ payload: userCredentials });
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    token: "",
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    admin: "",
-    userInfo: {},
-  },
-  reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload.token;
-      state.username = action.payload.username;
-      state.password = action.payload.password;
-      state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
-      state.email = action.payload.email;
-      state.admin = action.payload.admin;
+    user: {
+      id: null,
+      username: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      admin: false,
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(loginUser.fulfilled, (state, action) => {
-  //       state.userInfo = action.payload.userData;
-  //     })
-  //     .addCase(logoutUser.fulfilled, (state) => {
-  //       state.token = "";
-  //       state.username = "";
-  //       state.password = "";
-  //       state.firstName = "";
-  //       state.lastName = "";
-  //       state.email = "";
-  //       state.admin = "";
-  //       state.userInfo = {};
-  //     });
-  // },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(soapApi.endpoints.loginUser.matchFulfilled);
+    builder.addMatcher(soapApi.endpoints.getUser.matchFulfilled);
+  },
 });
 
-export const { setToken, setUserId, setUserDetails } = userSlice.actions;
 export default userSlice.reducer;
