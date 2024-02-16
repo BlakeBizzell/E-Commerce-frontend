@@ -32,8 +32,8 @@ function SignIn() {
     try {
       const response = await loginUser(formData);
       dispatch(setToken(response.data.token));
-
       const userId = response.data.user.id;
+      console.log(userId);
       navigate("/products");
       if (!userId) {
         console.error("Failed to fetch user data.");

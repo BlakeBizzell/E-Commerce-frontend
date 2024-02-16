@@ -25,19 +25,19 @@ export const soapApi = createApi({
     }),
     addToCart: builder.mutation({
       query: ({ userId, productId, quantity }) => ({
-        url: `/api/users/${userId}/cart`,
+        url: `/auth/users/${userId}/cart`,
         method: "POST",
         body: { productId, quantity },
       }),
     }),
     removeFromCart: builder.mutation({
       query: ({ userId, cartItemId }) => ({
-        url: `/api/users/${userId}/cart/${cartItemId}`,
+        url: `/auth/users/${userId}/cart/${cartItemId}`,
         method: "DELETE",
       }),
     }),
     getCartItems: builder.query({
-      query: (userId) => `/api/users/${userId}/cart`,
+      query: (userId) => `/auth/users/${userId}/cart`,
     }),
   }),
 });
