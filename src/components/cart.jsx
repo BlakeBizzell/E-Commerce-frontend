@@ -10,13 +10,10 @@ const GetCart = () => {
   const { data, error, isLoading, refetch } = useGetCartItemsQuery(userId);
   const [removeFromCart] = useRemoveFromCartMutation();
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
   const handleRemoveFromCart = async (cartItemId) => {
     try {
       await removeFromCart({ userId: userId, cartItemId });
+      refetch();
       console.log("Item removed from cart successfully!");
     } catch (error) {
       console.error("Error removing item from cart:", error);

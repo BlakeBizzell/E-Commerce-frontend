@@ -13,8 +13,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useGetCartItemsQuery } from "../api/soapApi";
 
 const defaultTheme = createTheme({
   palette: {
@@ -24,6 +24,8 @@ const defaultTheme = createTheme({
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { data } = useGetCartItemsQuery(3);
+  const cartItemCount = data ? data.cartItems.length : 0;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,7 +58,7 @@ const NavBar = () => {
             </Typography>
             <IconButton color="inherit">
               <Badge
-                badgeContent={4}
+                badgeContent={cartItemCount}
                 color="secondary"
                 component={RouterLink}
                 to="/cart"

@@ -1,7 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Routes, Route } from "react-router-dom";
-import GetAllProducts from "./components/Products.jsx";
+import GetAllProducts from "./components/products.jsx";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
