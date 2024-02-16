@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Card, CardContent, Button } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
@@ -7,14 +6,15 @@ const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
   const { userId } = useParams();
   const [addToCart] = useAddToCartMutation();
-  console.log("params", userId);
+
   const handleAddToCart = async (productId) => {
     // Hardcoded userId as 3 for testing purposes
     const hardCodedUserId = 3;
-    const quantity = 1; // You can adjust the quantity as needed
+    const quantity = 1;
 
     try {
       await addToCart({ userId: hardCodedUserId, productId, quantity });
+
       console.log("Product added to cart successfully!");
     } catch (error) {
       console.error("Error adding product to cart:", error);
