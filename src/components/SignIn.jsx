@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLoginUserMutation } from "../api/soapApi";
+import { setUserId } from "../slice/userIdSlice";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function SignIn() {
     try {
       const response = await loginUser(formData);
       if (response.data.user.id) {
+        dispatch(setUserId(response.data.user.id));
         navigate("/products");
       } else {
         console.error("Failed to fetch user data.");

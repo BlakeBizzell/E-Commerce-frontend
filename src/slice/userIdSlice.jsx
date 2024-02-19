@@ -6,12 +6,12 @@ const userIdSlice = createSlice({
   },
   reducers: {
     setUserId: (state, action) => {
-      state.userId = action.payload;
+      state.user.id = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(storeUserId.fulfilled, (state, action) => {
-      state.userId = action.payload;
+      state.user.id = action.payload;
     });
   },
 });
