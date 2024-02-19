@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,10 +13,8 @@ import Container from "@mui/material/Container";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useLoginUserMutation } from "../api/soapApi";
-import { setUserId } from "../slice/userIdSlice";
 
 function SignIn() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -31,8 +28,8 @@ function SignIn() {
     event.preventDefault();
     try {
       const response = await loginUser(formData);
-      if (response.data.user.id) {
-        dispatch(setUserId(response.data.user.id));
+      if (response) {
+        console.log(response);
         navigate("/products");
       } else {
         console.error("Failed to fetch user data.");
