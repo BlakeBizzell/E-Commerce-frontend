@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { soapApi } from "../api/soapApi";
 
-const GetCartSlice = createSlice({
+const getCartSlice = createSlice({
   name: "cart",
   initialState: [],
   extraReducers: (builder) => {
@@ -14,4 +14,4 @@ const GetCartSlice = createSlice({
   },
 });
 
-export default GetCartSlice;
+export default getCartSlice;

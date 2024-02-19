@@ -1,23 +1,18 @@
 import { Box, Card, CardContent, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
-  const dispatcher = useDispatch();
   const [addToCart] = useAddToCartMutation();
+  const userId = useSelector((state) => state.user.id);
 
-  const userIdFromReduxStore = useSelector((state) => state.userIdSlice);
-
-  console.log(userIdFromReduxStore, "this is my user id");
   const handleAddToCart = async (productId) => {
-    // Hardcoded userId as 3 for testing purposes
-    const hardCodedUserId = 3;
     const quantity = 1;
 
     try {
-      await addToCart({ userId: hardCodedUserId, productId, quantity });
+      await addToCart({ userId, productId, quantity });
 
       console.log("Product added to cart successfully!");
     } catch (error) {

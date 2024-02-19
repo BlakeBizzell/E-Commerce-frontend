@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,9 +12,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useLoginUserMutation } from "../api/soapApi";
+import { useGetUserQuery, useLoginUserMutation } from "../api/soapApi";
 
 function SignIn() {
+  const theUser = useGetUserQuery();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -28,8 +29,9 @@ function SignIn() {
     event.preventDefault();
     try {
       const response = await loginUser(formData);
-      if (response) {
-        console.log(response);
+      if (response.data.user.id) {
+        let id = response.data.user.id;
+        // theUser()
         navigate("/products");
       } else {
         console.error("Failed to fetch user data.");

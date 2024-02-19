@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { soapApi } from "../api/soapApi";
+import { useGetUserQuery } from "../api/soapApi";
 
-function getUser(user) {
-  console.log("User data:", user.id);
+function getUserFunc(user) {
+  console.log(user);
 }
 
-const userSlice = createSlice({
+const getUserSlice = createSlice({
   name: "user",
   initialState: {},
   reducers: {},
@@ -13,22 +14,21 @@ const userSlice = createSlice({
     builder.addMatcher(
       soapApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
-        const userId = payload.user;
-
-        getUser(userId);
+        const userId = payload.user.id;
+        return payload.user;
       }
     );
 
     builder.addMatcher(
       soapApi.endpoints.getUser.matchFulfilled,
       (state, { payload }) => {
-        return {
+        state.user = {
           ...state,
-          user: payload,
+          userData: payload,
         };
       }
     );
   },
 });
 
-export default userSlice.reducer;
+export default getUserSlice.reducer;
