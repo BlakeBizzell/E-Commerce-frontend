@@ -22,17 +22,88 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <NavBar />
         <Routes>
-          <Route path="/" element={<InitialView />} />
-          <Route path="/products" element={<GetAllProducts />} />
-          <Route path="/products/:id" element={<GetProduct />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/myAccount" element={<GetAccount />} />
-          <Route path="/cart" element={<GetCart />} />
-          <Route path="/admin" element={<IsAdmin />} />
-          <Route path="/Checkout" element={<Checkout />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <NavBar show={false} />
+                <InitialView />
+              </>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <>
+                <NavBar show={true} />
+                <GetAllProducts />
+              </>
+            }
+          />
+          <Route
+            path="/products/:id"
+            element={
+              <>
+                <NavBar show={true} />
+                <GetProduct />
+              </>
+            }
+          />
+          <Route
+            path="/sign-in"
+            element={
+              <>
+                <NavBar show={false} />
+                <SignIn />
+              </>
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <>
+                <NavBar show={false} />
+                <SignUp />
+              </>
+            }
+          />
+          <Route
+            path="/myAccount"
+            element={
+              <>
+                <NavBar show={true} />
+                <GetAccount />
+              </>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <>
+                <NavBar show={true} />
+                <GetCart />
+              </>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <NavBar show={true} />
+                <IsAdmin />
+              </>
+            }
+          />
+          <Route
+            path="/Checkout"
+            element={
+              <>
+                <NavBar show={true} />
+                <Checkout />
+              </>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </>

@@ -18,7 +18,6 @@ function SignIn() {
   const theUser = useGetUserQuery();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
-
   const [loginUser] = useLoginUserMutation();
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,9 +28,9 @@ function SignIn() {
     event.preventDefault();
     try {
       const response = await loginUser(formData);
-      if (response.data.user.id) {
-        let id = response.data.user.id;
-        // theUser()
+      if (response.data) {
+        console.log(response.data.user.id);
+        console.log(response.data.user);
         navigate("/products");
       } else {
         console.error("Failed to fetch user data.");

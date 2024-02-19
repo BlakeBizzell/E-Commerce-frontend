@@ -22,7 +22,7 @@ const defaultTheme = createTheme({
   },
 });
 
-const NavBar = () => {
+const NavBar = ({ show }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { data } = useGetCartItemsQuery(3);
   const cartItemCount = data ? data.cartItems.length : 0;
@@ -39,12 +39,10 @@ const NavBar = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: show ? "flex" : "none" }}>
         <CssBaseline />
         <MuiAppBar position="fixed">
-          {" "}
           <Toolbar>
-            {" "}
             <IconButton
               edge="start"
               color="inherit"
