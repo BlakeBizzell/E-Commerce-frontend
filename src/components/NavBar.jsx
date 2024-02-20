@@ -15,7 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useGetCartItemsQuery } from "../api/soapApi";
-import IsAdmin from "./IsAdmin";
+import IsAdmin from "./admin/IsAdmin";
 import { useSelector } from "react-redux";
 
 const defaultTheme = createTheme({

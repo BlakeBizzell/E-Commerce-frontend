@@ -9,9 +9,11 @@ import GetProduct from "./components/SingleProduct";
 import GetAccount from "./components/accountInformation.jsx";
 import GetCart from "./components/cart";
 import InitialView from "./components/initialView.jsx";
-import IsAdmin from "./components/IsAdmin.jsx";
+import IsAdmin from "./components/admin/IsAdmin.jsx";
 import Checkout from "./components/Checkout.jsx";
 import UpdateUserInfo from "./components/UpdateUserInfo.jsx";
+import GetUserById from "./components/admin/GetUserAdmin.jsx";
+import EditUser from "./components/admin/EditUserAdmin.jsx";
 
 function App() {
   const darkTheme = createTheme({
@@ -36,6 +38,8 @@ function App() {
             <Route path="/admin" element={<IsAdmin />} />
             <Route path="/Checkout" element={<Checkout />} />
             <Route path="/updateUserInfo" element={<UpdateUserInfo />} />
+            <Route path="/user/:id" element={<GetUserById />} />
+            <Route path="/user/:id/edit" element={<EditUser />} />
           </Routes>
         </div>
       </ThemeProvider>
