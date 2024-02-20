@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useGetCartItemsQuery } from "../api/soapApi";
 import IsAdmin from "./IsAdmin";
+import { useSelector } from "react-redux";
 
 const defaultTheme = createTheme({
   palette: {
@@ -23,11 +24,17 @@ const defaultTheme = createTheme({
   },
 });
 
-const NavBar = ({ show }) => {
+const NavBar = (show) => {
   localStorage.getItem(IsAdmin);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { data } = useGetCartItemsQuery(3);
+  const { data } = useGetCartItemsQuery();
   const cartItemCount = data ? data.cartItems.length : 0;
+  const user = useSelector((state) => state.user);
+  const userId = user ? user.id : null;
+
+  if (!userId) {
+    return null;
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
