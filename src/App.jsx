@@ -23,19 +23,21 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<InitialView />} />
-          <Route path="/products" element={<GetAllProducts />} />
-          <Route path="/products/:id" element={<GetProduct />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/myAccount" element={<GetAccount />} />
-          <Route path="/cart" element={<GetCart />} />
-          <Route path="/admin" element={<IsAdmin />} />
-          <Route path="/Checkout" element={<Checkout />} />
-          <Route path="/updateUserInfo" element={<UpdateUserInfo />} />
-        </Routes>
+        <div>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<InitialView />} />
+            <Route path="/products" element={<GetAllProducts />} />
+            <Route path="/products/:id" element={<GetProduct />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/myAccount" element={<GetAccount />} />
+            <Route path="/cart" element={<GetCart />} />
+            <Route path="/admin" element={<IsAdmin />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/updateUserInfo" element={<UpdateUserInfo />} />
+          </Routes>
+        </div>
       </ThemeProvider>
     </>
   );
