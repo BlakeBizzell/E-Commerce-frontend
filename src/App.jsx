@@ -1,6 +1,7 @@
+import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import GetAllProducts from "./components/products.jsx";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
@@ -21,12 +22,20 @@ function App() {
       mode: "dark",
     },
   });
+
+  // Get the current location
+  const location = useLocation();
+
+  // Check if it's the initial view page
+  const isInitialViewPage = location.pathname === "/";
+
   return (
     <>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <div>
-          <NavBar />
+          {/* Conditionally render NavBar */}
+          {!isInitialViewPage && <NavBar />}
           <Routes>
             <Route path="/" element={<InitialView />} />
             <Route path="/products" element={<GetAllProducts />} />
