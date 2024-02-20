@@ -1,17 +1,14 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-
-// import { mainListItems, secondaryListItems } from "./listItems";
+import AllProducts from "./GetAllProductsAdmin.jsx";
 import GetAllUsers from "./GetAllUsersAdmin.jsx";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
-
-const drawerWidth = 240;
 
 const defaultTheme = createTheme({
   palette: {
@@ -61,15 +58,29 @@ export default function Dashboard() {
                     display: "flex",
                     flexDirection: "column",
                     height: 240,
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  {/* <Deposits /> */}
+                  <Link to="/addProduct">
+                    <Button variant="contained" color="primary">
+                      Add Product
+                    </Button>
+                  </Link>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {/* <Orders /> */}
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 400,
+                    overflow: "auto",
+                  }}
+                >
+                  <AllProducts />
                 </Paper>
               </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -17,7 +17,7 @@ const EditUser = () => {
   const navigate = useNavigate();
 
   const { data: user, error, isLoading } = useGetUserQuery(id);
-  const updateUserMutation = useUpdateUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   const [userData, setUserData] = useState({
     id: id,
@@ -42,7 +42,8 @@ const EditUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateUserMutation(userData);
+      const response = await updateUser(JSON.stringify(userData));
+      console.log("user updated:", response);
       navigate(`/user/${id}`);
     } catch (error) {
       console.error("Error updating user:", error);

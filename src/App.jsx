@@ -15,6 +15,8 @@ import Checkout from "./components/Checkout.jsx";
 import UpdateUserInfo from "./components/UpdateUserInfo.jsx";
 import GetUserById from "./components/admin/GetUserAdmin.jsx";
 import EditUser from "./components/admin/EditUserAdmin.jsx";
+import AddProductForm from "./components/admin/AddProduct.jsx";
+import GetSingleProduct from "./components/admin/AdminSingleProduct.jsx";
 
 function App() {
   const darkTheme = createTheme({
@@ -49,6 +51,8 @@ function App() {
             <Route path="/updateUserInfo" element={<UpdateUserInfo />} />
             <Route path="/user/:id" element={<GetUserById />} />
             <Route path="/user/:id/edit" element={<EditUser />} />
+            <Route path="/addProduct" element={<AddProductForm />} />
+            <Route path="/singleProduct/:id" element={<GetSingleProduct />} />
           </Routes>
         </div>
       </ThemeProvider>
