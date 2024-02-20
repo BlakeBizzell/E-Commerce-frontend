@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
 import { Card, CardContent, Button, Box } from "@mui/material";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import {
   useGetCartItemsQuery,
   useRemoveFromCartMutation,
 } from "../api/soapApi";
+import { useSelector } from "react-redux";
 
 const GetCart = () => {
-  const userId = 3;
+  const userId = useSelector((state) => state.user.id);
+  console.log("cart userId: ", userId);
   const { data, error, isLoading, refetch } = useGetCartItemsQuery(userId);
   const [removeFromCart] = useRemoveFromCartMutation();
 
@@ -29,7 +30,12 @@ const GetCart = () => {
         <>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             {/* Button to navigate to the checkout page */}
-            <Button component={Link} to="/checkout" variant="contained" sx={{ mt: 3, ml: 1 }}>
+            <Button
+              component={Link}
+              to="/checkout"
+              variant="contained"
+              sx={{ mt: 3, ml: 1 }}
+            >
               Proceed to Checkout
             </Button>
           </Box>

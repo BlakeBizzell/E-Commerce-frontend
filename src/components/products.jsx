@@ -12,6 +12,7 @@ const GetAllProducts = () => {
     const quantity = 1;
 
     try {
+      console.log(userId);
       await addToCart({ userId, productId, quantity });
 
       console.log("Product added to cart successfully!");

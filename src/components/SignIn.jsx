@@ -29,8 +29,8 @@ function SignIn() {
     try {
       const response = await loginUser(formData);
       if (response.data) {
-        const isAdmin = response.data.user.admin;
-        // localStorage.setItem(isAdmin);
+        const isAdmin = response.data.user.id;
+        console.log(isAdmin);
         navigate("/products");
       } else {
         console.error("Failed to fetch user data.");
