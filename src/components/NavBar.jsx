@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useGetCartItemsQuery } from "../api/soapApi";
+import IsAdmin from "./IsAdmin";
 
 const defaultTheme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ const defaultTheme = createTheme({
 });
 
 const NavBar = ({ show }) => {
+  localStorage.getItem(IsAdmin);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { data } = useGetCartItemsQuery(3);
   const cartItemCount = data ? data.cartItems.length : 0;

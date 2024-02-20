@@ -1,6 +1,7 @@
 import { useGetUserQuery } from "../api/soapApi";
-import { Box, Card, CardContent } from "@mui/material";
+import { Box, Button, Card, CardContent } from "@mui/material";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const GetAccount = () => {
   const userId = useSelector((state) => state.user.id);
   const { data, isError, isLoading, isSuccess } = useGetUserQuery(userId);
@@ -22,6 +23,9 @@ const GetAccount = () => {
             <h1>{data.firstName}</h1>
             <h1>{data.lastName}</h1>
             <h1>{data.email}</h1>
+            <Link to={"/updateUserInfo"}>
+              <Button>Update Information</Button>
+            </Link>
           </CardContent>
         </Card>
       </Box>

@@ -11,6 +11,7 @@ import GetCart from "./components/cart";
 import InitialView from "./components/initialView.jsx";
 import IsAdmin from "./components/IsAdmin.jsx";
 import Checkout from "./components/Checkout.jsx";
+import UpdateUserInfo from "./components/UpdateUserInfo.jsx";
 
 function App() {
   const darkTheme = createTheme({
@@ -101,6 +102,15 @@ function App() {
               <>
                 <NavBar show={true} />
                 <Checkout />
+              </>
+            }
+          />
+          <Route
+            path="/updateUserInfo"
+            element={
+              <>
+                <NavBar show={true} />
+                <UpdateUserInfo />
               </>
             }
           />
