@@ -41,16 +41,18 @@ const GetSingleProduct = () => {
           <p>${data.price}</p>
         </CardContent>
         <div style={{ textAlign: "center" }}>
-          <Link to={`/admin`}>
+          <Link to={`/admin`} style={{ textDecoration: "none" }}>
             <Button>Back</Button>
-            <Link to={`/editProduct/${data.id}`}>
-              <Button>Edit</Button>
-            </Link>
+          </Link>
+          <Link
+            to={`/editProduct/${data.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Button>Edit</Button>
           </Link>
         </div>
       </Card>
     </Box>
   );
 };
-
 export default GetSingleProduct;

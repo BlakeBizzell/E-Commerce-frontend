@@ -36,7 +36,6 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -50,7 +49,6 @@ export default function Dashboard() {
                   <GetAllUsers />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -62,14 +60,13 @@ export default function Dashboard() {
                     alignItems: "center",
                   }}
                 >
-                  <Link to="/addProduct">
+                  <Link to="/addProduct" style={{ textDecoration: "none" }}>
                     <Button variant="contained" color="primary">
                       Add Product
                     </Button>
                   </Link>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper
                   sx={{

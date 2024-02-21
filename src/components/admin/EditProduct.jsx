@@ -22,6 +22,7 @@ const EditProduct = () => {
     price: (product && product.price) || "",
     image: (product && product.image) || "",
     description: (product && product.description) || "",
+    class: (product && product.class) || "",
   });
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const EditProduct = () => {
         price: product.price,
         image: product.image,
         description: product.description,
+        class: product.class,
       });
     }
   }, [product]);
@@ -43,9 +45,12 @@ const EditProduct = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      console.log(id, formData);
-      await updateProduct({ id, data: formData });
-      navigate(`/admin`);
+      const response = await updateProduct({ id, data: formData });
+      if (response.error) {
+        console.error("Error updating product:", response.error);
+      } else {
+        navigate(`/admin`);
+      }
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -126,6 +131,14 @@ const EditProduct = () => {
               name="description"
               label="Description"
               value={formData.description}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              name="class"
+              label="Class"
+              value={formData.class}
               onChange={handleChange}
               fullWidth
               margin="normal"
