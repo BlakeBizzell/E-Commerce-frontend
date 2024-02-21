@@ -28,7 +28,7 @@ const GetCart = () => {
   // Refresh the cart items when the component mounts
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   localStorage.setItem("userId", userId);
 

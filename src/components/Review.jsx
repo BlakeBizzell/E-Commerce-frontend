@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
+import { useGetCartItemsQuery, useGetUserQuery } from "../api/soapApi";
+import { useSelector } from "react-redux";
 
-const Review = ({ cartItems, address, payment }) => {
+const Review = () => {
+  const storedUserId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.user.id) || storedUserId;
+
+  const { data: cartData } = useGetCartItemsQuery(userId);
+  const { data: userData } = useGetUserQuery(userId);
+
+  const [cartItems, setCartItems] = useState([]);
+  const [address, setAddress] = useState("");
+  const [payment, setPayment] = useState("");
+
+  useEffect(() => {
+    if (cartData && cartData.cartItems) {
+      setCartItems(cartData.cartItems);
+    }
+  }, [cartData]);
+
+  useEffect(() => {
+    if (userData) {
+      setAddress(userData.address);
+      setPayment(userData.payment);
+    }
+  }, [userData]);
+
   // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.product.price,
-    0
-  );
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price, 0);
 
   return (
     <>
@@ -51,21 +73,6 @@ const Review = ({ cartItems, address, payment }) => {
       </Grid>
     </>
   );
-};
-
-Review.propTypes = {
-  cartItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      product: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        price: PropTypes.number.isRequired,
-      }).isRequired,
-    })
-  ).isRequired,
-  address: PropTypes.string.isRequired,
-  payment: PropTypes.string.isRequired,
 };
 
 export default Review;
