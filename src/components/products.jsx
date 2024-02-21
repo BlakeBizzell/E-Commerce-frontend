@@ -2,6 +2,7 @@ import { Box, Card, CardContent, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
 import { useSelector } from "react-redux";
+import styles from "../styles";
 
 
 const GetAllProducts = () => {
