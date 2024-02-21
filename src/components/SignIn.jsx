@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useGetUserQuery, useLoginUserMutation } from "../api/soapApi";
+import styles from "../styles";
 
 function SignIn() {
   const theUser = useGetUserQuery();
@@ -50,15 +51,8 @@ function SignIn() {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Box sx={styles.SignInBox1} >
+          <Avatar sx={styles.SignInAvatar1}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -68,7 +62,7 @@ function SignIn() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={styles.SignInBox2}
           >
             <TextField
               margin="normal"
@@ -102,7 +96,7 @@ function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={styles.SignInButton1}
             >
               Sign In
             </Button>

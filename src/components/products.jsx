@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
 import { useSelector } from "react-redux";
 
+
 const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
   const [addToCart] = useAddToCartMutation();
@@ -26,23 +27,19 @@ const GetAllProducts = () => {
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {data && (
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Box sx={styles.productsBox1}>
           {data.map((product) => (
-            <Card key={product.id} sx={{ minWidth: 275, maxWidth: 300, m: 1 }}>
+            <Card key={product.id} sx={styles.productsCard1}>
               <CardContent>
                 <img
                   src={`data:image/png;base64, ${product.image}`}
                   alt="Product Image"
-                  style={{
-                    height: "200px",
-                    display: "block",
-                    margin: "0 auto",
-                  }}
+                  style={styles.productsImg1}
                 />
                 <p>{product.name}</p>
                 <p>${product.price}</p>
               </CardContent>
-              <div style={{ textAlign: "center" }}>
+              <div style={styles.productsDiv1}>
                 <Link to={`/products/${product.id}`}>
                   <Button>See Details</Button>
                 </Link>

@@ -6,6 +6,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import styles from "../styles";
 
 // make it look prettier
 const GetProduct = () => {
@@ -25,8 +26,8 @@ const GetProduct = () => {
   }
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-      <Card key={data.id} sx={{ minWidth: "20%", maxWidth: "80%", m: 1  }}>
+    <Box sx={styles.SingleProductBox1}>
+      <Card key={data.id} sx={styles.SingleProductCard1}>
         <CardContent>
           <img
             src={`data:image/png;base64, ${data.image}`}
