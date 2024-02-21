@@ -1,4 +1,3 @@
-import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -26,10 +25,10 @@ function App() {
     },
   });
 
-  // Get the current location
+
   const location = useLocation();
 
-  // Check if it's the initial view page
+
   const isInitialViewPage = location.pathname === "/";
 
   return (
@@ -37,7 +36,7 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <div>
-          {/* Conditionally render NavBar */}
+     
           {!isInitialViewPage && <NavBar />}
           <Routes>
             <Route path="/" element={<InitialView />} />

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -33,7 +32,10 @@ const Review = () => {
   }, [userData]);
 
   // Calculate total price
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.product.price, 0);
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.product.price,
+    0
+  );
 
   return (
     <>

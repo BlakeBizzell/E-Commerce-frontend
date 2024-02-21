@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
-import { useGetCartItemsQuery } from "../api/soapApi"; // Import useGetCartItemsQuery hook to fetch cart items
+import { useGetCartItemsQuery } from "../api/soapApi"; 
 
 const theme = createTheme({
   palette: {
@@ -24,23 +24,22 @@ const theme = createTheme({
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
-  const [cartItems, setCartItems] = useState([]); // State to hold cart items
+  const [cartItems, setCartItems] = useState([]); 
   const steps = ["Shipping address", "Payment details", "Review your order"];
 
-  // Fetch cart items using useGetCartItemsQuery hook
-  const { data: cartData, isLoading, error } = useGetCartItemsQuery(3); // Assuming userId is 3
+  // Get userId from local storage
+  const storedUserId = localStorage.getItem("userId");
 
-  // Handle next step
+  const { data: cartData, isLoading, error } = useGetCartItemsQuery(storedUserId); 
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  // Handle back step
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // Fetch cart items and update state when data changes
   useEffect(() => {
     if (cartData) {
       setCartItems(cartData.cartItems);

@@ -9,7 +9,7 @@ const GetAllProducts = () => {
   const [addToCart] = useAddToCartMutation();
   const userId = useSelector((state) => state.user.id);
 
-  // Retrieve the user ID from localStorage
+
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (!userId && storedUserId) {
@@ -30,7 +30,7 @@ const GetAllProducts = () => {
     }
   };
 
-  // Save the user ID to localStorage
+
   localStorage.setItem("userId", userId);
 
   return (
