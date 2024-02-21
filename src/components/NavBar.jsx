@@ -30,11 +30,7 @@ const NavBar = (show) => {
   const { data } = useGetCartItemsQuery();
   const cartItemCount = data ? data.cartItems.length : 0;
   const user = useSelector((state) => state.user);
-  // const userId = user ? user.id : null;
 
-  // if (!userId) {
-  //   return null;
-  // }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

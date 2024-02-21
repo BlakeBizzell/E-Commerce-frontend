@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Card, CardContent, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
@@ -7,8 +8,10 @@ import {
 import { useSelector } from "react-redux";
 
 const GetCart = () => {
-  const userId = useSelector((state) => state.user.id);
+  const storedUserId = localStorage.getItem("userId");
+  const userId = useSelector((state) => state.user.id) || storedUserId;
   console.log("cart userId: ", userId);
+
   const { data, error, isLoading, refetch } = useGetCartItemsQuery(userId);
   const [removeFromCart] = useRemoveFromCartMutation();
 
@@ -22,6 +25,13 @@ const GetCart = () => {
     }
   };
 
+  // Refresh the cart items when the component mounts
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  localStorage.setItem("userId", userId);
+
   return (
     <div>
       {isLoading && <p>Loading cart items...</p>}
@@ -29,7 +39,6 @@ const GetCart = () => {
       {data && data.cartItems && data.cartItems.length > 0 && (
         <>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            {/* Button to navigate to the checkout page */}
             <Button
               component={Link}
               to="/checkout"
