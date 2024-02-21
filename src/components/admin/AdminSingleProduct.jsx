@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const GetSingleProduct = () => {
   const { id } = useParams();
+  console.log("this is my productId: ", id);
   const { data, error, isLoading } = useGetProductQuery(id);
 
   if (isLoading) {
@@ -42,7 +43,7 @@ const GetSingleProduct = () => {
         <div style={{ textAlign: "center" }}>
           <Link to={`/admin`}>
             <Button>Back</Button>
-            <Link>
+            <Link to={`/editProduct/${data.id}`}>
               <Button>Edit</Button>
             </Link>
           </Link>
