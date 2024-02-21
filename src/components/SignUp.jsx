@@ -16,6 +16,7 @@ import { useState } from "react";
 import Alert from "@mui/material/Alert";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WarningIcon from "@mui/icons-material/Warning";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme({
   palette: {
@@ -33,6 +34,8 @@ export default function SignUp() {
     email: "",
   });
 
+  const navigate = useNavigate();
+
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
 
@@ -47,6 +50,7 @@ export default function SignUp() {
       const response = await addNewUser(formData);
       if (response.status === 201 || 204) {
         setShowSuccessAlert(true);
+        navigate("/sign-in");
       } else if (response.status === 500) {
         setShowErrorAlert(true);
       }
