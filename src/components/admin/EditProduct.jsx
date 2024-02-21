@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetProductQuery,
   useUpdateProductMutation,
+  useDeleteProductMutation,
 } from "../../api/soapApi";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -14,6 +15,7 @@ const EditProduct = () => {
   const navigate = useNavigate();
   const { data: product, error, isLoading } = useGetProductQuery(id);
   const [updateProduct] = useUpdateProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
   const [formData, setFormData] = useState({
     name: (product && product.name) || "",
@@ -38,18 +40,26 @@ const EditProduct = () => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     try {
-      console.log("id is: ", id, "data is: ", formData);
-      await updateProduct({ id, formData });
-      navigate(`/product/${id}`);
+      console.log(id, formData);
+      await updateProduct({ id, data: formData });
+      navigate(`/admin`);
     } catch (error) {
       console.error("Error updating product:", error);
     }
   };
 
-  // Render loading, error, or product not found UI
+  const handleDelete = async () => {
+    try {
+      await deleteProduct(id);
+      navigate("/admin");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   if (isLoading) {
     return (
       <div
@@ -87,7 +97,7 @@ const EditProduct = () => {
           <Typography variant="h6" gutterBottom>
             Edit Product Information
           </Typography>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSave}>
             <TextField
               name="name"
               label="Name"
@@ -120,9 +130,26 @@ const EditProduct = () => {
               fullWidth
               margin="normal"
             />
-            <Button type="submit" variant="contained" color="primary">
-              Save
-            </Button>
+            <div style={{ marginTop: 16 }}>
+              <Button type="submit" variant="contained" color="primary">
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleDelete}
+                style={{ marginLeft: 8 }}
+              >
+                Delete
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => navigate(`/singleProduct/${id}`)}
+                style={{ marginLeft: 8 }}
+              >
+                Back
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
