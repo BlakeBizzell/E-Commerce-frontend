@@ -39,13 +39,21 @@ const EditProduct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    const parsedValue = name === "price" ? parseFloat(value) : value;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: parsedValue }));
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const response = await updateProduct({ id, data: formData });
+      const productId = id;
+      console.log(productId);
+      console.log(formData);
+      const response = await updateProduct({
+        id: productId,
+        formData: JSON.stringify(formData),
+      });
+      console.log(response);
       if (response.error) {
         console.error("Error updating product:", response.error);
       } else {

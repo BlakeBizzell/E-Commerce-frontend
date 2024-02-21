@@ -1,7 +1,6 @@
 import React from "react";
 import { useGetProductsQuery } from "../../api/soapApi";
 import {
-  Box,
   Typography,
   Button,
   Container,
