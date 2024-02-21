@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const soapApi = createApi({
   reducerPath: "soapApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://e-commerce-api-oddb.onrender.com",
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({ query: () => "/api/products" }),

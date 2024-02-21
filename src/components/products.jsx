@@ -2,20 +2,11 @@ import { Box, Card, CardContent, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery, useAddToCartMutation } from "../api/soapApi";
 import { useSelector } from "react-redux";
-import React, { useEffect } from "react";
 
 const GetAllProducts = () => {
   const { data, error, isLoading } = useGetProductsQuery();
   const [addToCart] = useAddToCartMutation();
   const userId = useSelector((state) => state.user.id);
-
-
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    if (!userId && storedUserId) {
-      console.log("Restoring userId from localStorage:", storedUserId);
-    }
-  }, [userId]);
 
   const handleAddToCart = async (productId) => {
     const quantity = 1;
@@ -29,9 +20,6 @@ const GetAllProducts = () => {
       console.error("Error adding product to cart:", error);
     }
   };
-
-
-  localStorage.setItem("userId", userId);
 
   return (
     <div>

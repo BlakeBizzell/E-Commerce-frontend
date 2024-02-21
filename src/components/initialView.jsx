@@ -1,18 +1,8 @@
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Carousel from "react-material-ui-carousel";
 import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../api/soapApi";
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
 
 const InitialView = () => {
   const [products, setProducts] = useState([]);
